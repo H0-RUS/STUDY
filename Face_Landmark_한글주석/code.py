@@ -1,27 +1,22 @@
 # 출처: https://needjarvis.tistory.com/641 [자비스가 필요해:티스토리]
-# Facial landmarks with dlib, OpenCV, and PythonPython
 
-# import the necessary packages
 from imutils import face_utils
 import numpy as np
 import imutils
 import dlib
 import cv2
 
-
 def show_raw_detection(image, detector, predictor):
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-
-    # detect faces in the grayscale image
+    # cvtColor : 색상변환 ex) BGR2GRAY = 회색으로 이미지 반전
     rects = detector(gray, 1)
 
-    # loop over the face detections
+    # 얼굴 찾기 반복
     for (i, rect) in enumerate(rects):
-        # determine the facial landmarks for the face region, then
-        # convert the facial landmark (x, y)-coordinates to a NumPy
-        # array
+        # enumerate 함수 = index와 값이 모두 return 되는 ps개꿀 함수
         shape = predictor(gray, rect)
         shape = face_utils.shape_to_np(shape)
+        # shape에 얼굴 연동 행렬 초기화
 
         # convert dlib's rectangle to a OpenCV-style bounding box
         # [i.e., (x, y, w, h)], then draw the face bounding box
